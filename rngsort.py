@@ -5,7 +5,7 @@ from collections import Counter
 random_list = [] # Creates empty list
 x = 0 
 while x < 100:
-    random_list.append(random.randrange(1,65535)) # Append 100 random numbers to the list in the range of 1,16
+    random_list.append(random.randrange(1,17)) # Append 100 random numbers to the list in the range of 1,16
     x+=1
 
 print(random_list)
@@ -13,7 +13,7 @@ print(random_list)
 secrets_list = []
 y = 0
 while y < 100:
-    secrets_list.append(secrets.choice(range(1,65535))) # Append 100 random numbers using the secrets module
+    secrets_list.append(secrets.choice(range(1,17))) # Append 100 random numbers using the secrets module
     y+=1
 
 print(secrets_list)
@@ -34,4 +34,12 @@ print(secrets_count)
 ## It just made it so every number was only used once
 # -------------------------------------
 
+
+sorted_list = [] # Creates empty list
+x = 0 
+while x < 100:
+    sorted_list.append(random.randrange(1,17)) # Append 100 random numbers to the list in the range of 1,16
+    x+=1
+
+print(sorted_list)
 
