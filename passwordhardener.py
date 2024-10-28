@@ -1,6 +1,6 @@
 import re
 
-password_file = "password_file.txt" # variable storing a text file where weak passwords will be written
+password_file = "Password_file.txt" # variable storing a text file where weak passwords will be written
 
 def password_strength(password):
     strength = 0 # intialize the password strength
@@ -27,7 +27,52 @@ def password_strength(password):
     else:
         feedback.append("Password needs at least one digit.")
     
-    if re.search(r'[]',password):
+    if re.search(r'[!@#$%^&*(),.?":{}|<>]',password):
         strength+=1
     else:
         feedback.append("Password needs at least one special character.")
+    
+    if not re.search(r'(password|123|admin|forget)',password, re.IGNORECASE):
+        strength+=1
+    else:
+        feedback.append("Avoid using common passwords like password, 123, admin, and forget")
+    
+    if strength >= 6:
+        return "Strong Password!", feedback
+    
+    elif strength >= 4:
+        return "Moderate password, could use some strengthing.", feedback
+    else:
+        return "Weak password, needs improvement.",feedback 
+    
+def save_feedback(feedback):
+    with open(password_file, "a") as f:
+        f.write(f"Password: {password}\n")  # Write the actual password
+        f.write("Password Feedback:\n")
+        for line in feedback:
+            f.write(f"- {line}\n")  # Write each feedback line to the file
+        f.write("\n")
+        f.close()
+
+
+
+if __name__ ==  "__main__":
+    password = input("Create a password:") # Have the user enter a password
+    result, suggestions = password_strength(password) # call the password function
+    print(result)
+
+    if suggestions:
+        print("Suggestions to improve:")
+        for suggestions in suggestions:
+            print(f"-{suggestions}")
+    
+    if result.startswith("Weak"):
+        print(f"Saving feedback to {password_file}")
+        save_feedback(suggestions)
+
+    
+
+
+    
+
+
