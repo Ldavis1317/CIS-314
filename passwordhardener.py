@@ -47,11 +47,8 @@ def password_strength(password):
     
 def save_feedback(feedback):
     with open(password_file, "a") as f:
-        f.write(f"Password: {password}\n")  # Write the actual password
         f.write("Password Feedback:\n")
-        for line in feedback:
-            f.write(f"- {line}\n")  # Write each feedback line to the file
-        f.write("\n")
+        f.write("\nPassword Feedback: " + "".join(feedback) + "\n")
         f.close()
 
 
