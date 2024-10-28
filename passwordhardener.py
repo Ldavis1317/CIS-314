@@ -32,40 +32,39 @@ def password_strength(password):
     else:
         feedback.append("Password needs at least one special character.")
     
-    if not re.search(r'(password|123|admin|forget)',password, re.IGNORECASE):
+    if not re.search(r'(password|123|admin|forget)',password, re.IGNORECASE): # ignorecase recognizes patterns no matter the capitalization
         strength+=1
     else:
         feedback.append("Avoid using common passwords like password, 123, admin, and forget")
     
-    if strength >= 6:
+    if strength >= 6: # Determine overall strength of password
         return "Strong Password!", feedback
     
-    elif strength >= 4:
+    elif strength >= 4: # Determine if it's moderate
         return "Moderate password, could use some strengthing.", feedback
-    else:
+    else:  # Determine if it's weak
         return "Weak password, needs improvement.",feedback 
     
 def save_feedback(feedback):
-    with open(password_file, "a") as f:
-        f.write("Password Feedback:\n")
-        f.write("\nPassword Feedback: " + "".join(feedback) + "\n")
-        f.close()
+    # append feedback to password file
+    with open(password_file, "a") as f: # open with the append mode
+        f.write("Password Feedback: " + "".join(feedback) + "\n")  # Join feedback with a comma
 
 
-
-if __name__ ==  "__main__":
+if __name__ ==  "__main__": # Driver code
     password = input("Create a password:") # Have the user enter a password
-    result, suggestions = password_strength(password) # call the password function
+    result, suggestions = password_strength(password) # call the password function and run password through
     print(result)
 
-    if suggestions:
-        print("Suggestions to improve:")
+    if suggestions: # print suggestions for strengthing password
+        print("Suggestions to improve:") 
         for suggestions in suggestions:
-            print(f"-{suggestions}")
+            print(f"-{suggestions}") # Print each suggestions
     
+    # if password is weak save to password file
     if result.startswith("Weak"):
         print(f"Saving feedback to {password_file}")
-        save_feedback(suggestions)
+        save_feedback(suggestions) # call save function to store suggestions 
 
     
 
