@@ -20,7 +20,7 @@ def password_strength(password):
     if re.search(r'[A-Z]', password):
         strength+=1
     else:
-        feedback.append("Passowrd needs at least one uppercase letter.")
+        feedback.append("Password needs at least one uppercase letter.")
     
     if re.search(r'[0-9]', password):
         strength+=1
@@ -41,7 +41,7 @@ def password_strength(password):
         return "Strong Password!", feedback
     
     elif strength >= 4: # Determine if it's moderate
-        return "Moderate password, could use some strengthing.", feedback
+        return "Moderate password, could use some strengthening.", feedback
     else:  # Determine if it's weak
         return "Weak password, needs improvement.",feedback 
     
@@ -56,19 +56,15 @@ if __name__ ==  "__main__": # Driver code
     result, suggestions = password_strength(password) # call the password function and run password through
     print(result)
 
-    if suggestions: # print suggestions for strengthing password
+if suggestions: # print suggestions for strengthing password
         print("Suggestions to improve:") 
         for suggestions in suggestions:
             print(f"-{suggestions}") # Print each suggestions
     
-    # if password is weak save to password file
-    if result.startswith("Weak"):
+# if password is weak save to password file
+if result.startswith("Weak"):
         print(f"Saving feedback to {password_file}")
         save_feedback(suggestions) # call save function to store suggestions 
-
-    
-
-
     
 
 
