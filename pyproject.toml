@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "password-strength-checker"
+version = "1.0.0"
+description = "A GUI-based password strength checker."
+authors = ["Luke Davis, Trey Rios, Morgan Dehoff"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tk = "*"
